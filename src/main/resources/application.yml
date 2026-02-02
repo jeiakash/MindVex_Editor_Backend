@@ -36,10 +36,10 @@ spring:
   
   # Email Configuration for OTP
   mail:
-    host: ${MAIL_HOST:smtp.gmail.com}
-    port: ${MAIL_PORT:587}
-    username: ${MAIL_USERNAME:}
-    password: ${MAIL_PASSWORD:}
+    host: smtp.gmail.com
+    port: 587
+    username: jxiakash05@gmail.com
+    password: hbhq aiva rkck sxnw
     properties:
       mail:
         smtp:
@@ -97,6 +97,7 @@ cors:
 
 # App Configuration
 app:
+  frontend-url: ${FRONTEND_URL:http://localhost:5173}
   oauth2:
     authorized-redirect-uris:
       - http://localhost:5173/auth/callback

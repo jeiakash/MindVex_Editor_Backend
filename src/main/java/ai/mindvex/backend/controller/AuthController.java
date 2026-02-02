@@ -4,7 +4,6 @@ import ai.mindvex.backend.dto.*;
 import ai.mindvex.backend.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,38 +15,20 @@ public class AuthController {
     private final UserService userService;
 
     /**
-     * Step 1: Initiate registration - validates data and sends OTP
+     * Register a new user
      */
     @PostMapping("/register")
-    public ResponseEntity<OtpResponse> register(@Valid @RequestBody RegisterRequest request) {
-        OtpResponse response = userService.initiateRegistration(request);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
+        AuthResponse response = userService.register(request);
+        return ResponseEntity.ok(response);
     }
 
     /**
-     * Step 1: Initiate login - validates credentials and sends OTP
+     * Login with email and password
      */
     @PostMapping("/login")
-    public ResponseEntity<OtpResponse> login(@Valid @RequestBody LoginRequest request) {
-        OtpResponse response = userService.initiateLogin(request);
-        return ResponseEntity.ok(response);
-    }
-
-    /**
-     * Step 2: Verify OTP and complete authentication
-     */
-    @PostMapping("/verify-otp")
-    public ResponseEntity<AuthResponse> verifyOtp(@Valid @RequestBody OtpVerifyRequest request) {
-        AuthResponse response = userService.verifyOtpAndAuthenticate(request);
-        return ResponseEntity.ok(response);
-    }
-
-    /**
-     * Resend OTP to email
-     */
-    @PostMapping("/resend-otp")
-    public ResponseEntity<OtpResponse> resendOtp(@Valid @RequestBody ResendOtpRequest request) {
-        OtpResponse response = userService.resendOtp(request);
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
+        AuthResponse response = userService.login(request);
         return ResponseEntity.ok(response);
     }
 }
