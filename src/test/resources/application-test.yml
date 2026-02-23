@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  flyway:
+    enabled: false
+  mail:
+    host: localhost
+    port: 25
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: dummy-client-id
+            client-secret: dummy-client-secret
+
+jwt:
+  secret: dGVzdHNlY3JldGtleXRoYXRpc2xvbmdlbm91Z2hmb3JoczI1NnNpZ25pbmc=
+  expiration: 3600000
+  refresh-expiration: 86400000
+
+app:
+  frontend-url: http://localhost:5173
